@@ -3,6 +3,7 @@ package com.load_booking.load_booking.Model;
 import java.time.Instant;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,12 +22,16 @@ public class BookingEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private String shipperId;
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "load_id", referencedColumnName = "id")
     private LoadEntity load;
 
+    @Column(nullable =false)
     private String transporterId;
+    @Column(nullable =false)
     private double proposedRate;
+    @Column(nullable =false)
     private String comment;
 
     @Enumerated(EnumType.STRING)

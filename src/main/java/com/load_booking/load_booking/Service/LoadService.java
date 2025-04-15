@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.load_booking.load_booking.Model.BookingEntity;
 import com.load_booking.load_booking.Model.LoadEntity;
+import com.load_booking.load_booking.Repo.BookingRepo;
 import com.load_booking.load_booking.Repo.LoadRepo;
 import com.load_booking.load_booking.Exception.LoadValidationException;
 
@@ -15,6 +17,9 @@ import com.load_booking.load_booking.Exception.LoadValidationException;
 public class LoadService {
     @Autowired
     private LoadRepo loadRepo;
+
+    @Autowired
+    private BookingRepo bookingRepo;
 
     public LoadEntity addNewLoad(LoadEntity newLoad) {
         validateLoad(newLoad);

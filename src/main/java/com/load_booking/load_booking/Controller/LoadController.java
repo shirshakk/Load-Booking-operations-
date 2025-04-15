@@ -52,9 +52,9 @@ public class LoadController {
     }
     
     @PutMapping("/load/{loadId}")
-    public ResponseEntity<?> updateLoadDetails(@RequestBody LoadEntity updatedLoad,@PathVariable UUID id) {
+    public ResponseEntity<?> updateLoadDetails(@PathVariable UUID loadId,@RequestBody LoadEntity updatedLoad) {
         try{
-            loadService.UpdateLoadDetails(id,updatedLoad);
+            loadService.UpdateLoadDetails(loadId,updatedLoad);
             return ResponseEntity.ok().body("Load Updated Successfully");
         }catch(Exception e){
             return ResponseEntity.badRequest().body("Failed to update"+e.getMessage());
