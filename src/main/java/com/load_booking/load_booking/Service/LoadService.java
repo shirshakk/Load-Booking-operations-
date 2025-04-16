@@ -68,16 +68,23 @@ public class LoadService {
         }
         return load;
     }
-    public LoadEntity DeleteLoadDetail(UUID loadId){
-        LoadEntity load;
-        try{
-            load=loadRepo.getReferenceById(loadId);
-        }catch(Exception e){
-            throw new LoadValidationException("Data not found");
+    public LoadEntity DeleteLoadDetail(UUID loadId) {
+        try {
+            LoadEntity load = loadRepo.findById(loadId)
+                .orElseThrow(() -> new LoadValidationException("Load not found with ID: " + loadId));
+    
+            BookingEntity booking = bookingRepo.findByLoad(load)
+                .orElse(null);
+            if (booking != null) {
+                bookingRepo.delete(booking);
+            }
+            loadRepo.delete(load);
+            return load;
+        } catch (LoadValidationException e) {
+            throw e;
         }
-        loadRepo.deleteById(loadId);
-        return load;
     }
+
 
     private void validateLoad(LoadEntity load) {
         if (load == null) {

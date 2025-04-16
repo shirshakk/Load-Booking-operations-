@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +54,13 @@ public class BookingController {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @PutMapping("/booking/{bookingId}/accept")
+public ResponseEntity<BookingEntity> acceptBooking(@PathVariable UUID bookingId) {
+    BookingEntity acceptedBooking = bookingService.acceptBooking(bookingId);
+    return ResponseEntity.ok(acceptedBooking);
+}
+
 
     @DeleteMapping("booking/{bookingId}")
     public ResponseEntity<?> deleteBooking(@PathVariable UUID bookingId){

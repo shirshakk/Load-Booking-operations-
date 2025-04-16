@@ -23,15 +23,26 @@ public class BookingService {
     private LoadRepo loadRepo;
 
     public BookingEntity addBooking(BookingEntity newBooking){
-        LoadEntity load=loadRepo.findById(newBooking.getLoad().getId()).orElseThrow(() -> new LoadValidationException("Load not found"));
-        if(load.getStatus()==LoadStatus.CANCELLED){
+        UUID loadId = newBooking.getLoad().getId();
+        LoadEntity load = loadRepo.findById(loadId)
+            .orElseThrow(() -> new LoadValidationException("Load not found"));
+    
+        if (bookingRepo.existsByLoad_Id(loadId)) {
+            throw new LoadValidationException("Booking has already been done");
+        }
+    
+        if (load.getStatus() == LoadStatus.CANCELLED) {
             throw new LoadValidationException("Cannot book a cancelled load");
         }
+    
         load.setStatus(LoadStatus.BOOKED);
-        BookingEntity bookedEntity=bookingRepo.save(newBooking);
+    
+        BookingEntity bookedEntity = bookingRepo.save(newBooking);
         loadRepo.save(load);
+    
         return bookedEntity;
     }
+    
 
     public List<BookingEntity> getBookingDetails(String shipperId, String transporterId){
         List<BookingEntity> bookedDetails=bookingRepo.findAll();
@@ -55,5 +66,13 @@ public class BookingService {
         load.setStatus(LoadStatus.CANCELLED);
         loadRepo.save(load);
         return data;
+    }
+
+    public BookingEntity acceptBooking(UUID bookingId) {
+        BookingEntity booking = bookingRepo.findById(bookingId)
+            .orElseThrow(() -> new LoadValidationException("Booking not found"));
+    
+        booking.setStatus(BookingEntity.BookingStatus.ACCEPTED);
+        return bookingRepo.save(booking);
     }
 }
