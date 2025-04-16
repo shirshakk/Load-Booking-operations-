@@ -60,7 +60,7 @@ public class LoadController {
             return ResponseEntity.badRequest().body("Failed to update"+e.getMessage());
         }
     }
-
+    
     @DeleteMapping("/load/{loadId}")
     public ResponseEntity<?> DeleteLoadDetails(@PathVariable UUID loadId){
         try{
