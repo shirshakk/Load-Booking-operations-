@@ -55,7 +55,7 @@ public class BookingController {
             return ResponseEntity.noContent().build();
         }
     }
-    @PutMapping("/booking/{bookingId}/accept")
+    @PutMapping("/booking/{bookingId}")
     public ResponseEntity<BookingEntity> acceptBooking(@PathVariable UUID bookingId) {
         BookingEntity acceptedBooking = bookingService.acceptBooking(bookingId);
         return ResponseEntity.ok(acceptedBooking);
