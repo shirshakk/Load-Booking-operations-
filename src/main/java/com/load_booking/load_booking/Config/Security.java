@@ -1,6 +1,8 @@
 package com.load_booking.load_booking.Config;
 
 
+import java.beans.Customizer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.load_booking.load_booking.Service.UserDetailService;
@@ -19,6 +22,10 @@ public class Security {
     @Autowired
     private UserDetailService userDetailsService;
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
     @Bean
     public AuthenticationProvider authProvider(){
         DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
@@ -32,9 +39,11 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .authorizeHttpRequests(authorize -> authorize
             .requestMatchers("/register").permitAll()
             .requestMatchers("/booking/**").hasRole("ADMIN")
-            .requestMatchers("/load/**","/booking/{bookingId}/accept").hasRole("USER")
+            .requestMatchers("/load/***","/booking/{bookingId}/accept","/booking/{bookingId}").hasRole("USER")
             .anyRequest().authenticated()
-        );
+        )
+        .httpBasic();
+        
     return http.build();
 }
 

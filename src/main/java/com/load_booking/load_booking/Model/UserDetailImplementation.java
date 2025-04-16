@@ -1,9 +1,10 @@
 package com.load_booking.load_booking.Model;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailImplementation implements UserDetails {
@@ -13,7 +14,9 @@ public class UserDetailImplementation implements UserDetails {
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singleton(() -> "USER");
+		String role = "ROLE_" + user.getRole().name().toUpperCase();
+    	System.out.println("Authority: " + role);
+   		return List.of(new SimpleGrantedAuthority(role));
 	}
 
 	@Override
