@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -54,14 +55,11 @@ public class BookingController {
             return ResponseEntity.noContent().build();
         }
     }
-
     @PutMapping("/booking/{bookingId}/accept")
-public ResponseEntity<BookingEntity> acceptBooking(@PathVariable UUID bookingId) {
-    BookingEntity acceptedBooking = bookingService.acceptBooking(bookingId);
-    return ResponseEntity.ok(acceptedBooking);
-}
-
-
+    public ResponseEntity<BookingEntity> acceptBooking(@PathVariable UUID bookingId) {
+        BookingEntity acceptedBooking = bookingService.acceptBooking(bookingId);
+        return ResponseEntity.ok(acceptedBooking);
+    }
     @DeleteMapping("booking/{bookingId}")
     public ResponseEntity<?> deleteBooking(@PathVariable UUID bookingId){
         try{
@@ -71,7 +69,4 @@ public ResponseEntity<BookingEntity> acceptBooking(@PathVariable UUID bookingId)
             return ResponseEntity.badRequest().body("Failed to delete booking");
         }
     }
-    
-    
-    
 }

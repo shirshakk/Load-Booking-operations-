@@ -75,4 +75,5 @@ public class BookingService {
         booking.setStatus(BookingEntity.BookingStatus.ACCEPTED);
         return bookingRepo.save(booking);
     }
+
 }
