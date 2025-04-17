@@ -100,22 +100,24 @@ Load Management APIs
 1. POST /load → Create a new load
 ```bash
    {
-  "shipperId": 101,
-  "truckType": "Flatbed",
-  "origin": "New York",
-  "destination": "Los Angeles",
-  "weight": 10000,
-  "dimensions": {
-    "length": 10,
-    "width": 5,
-    "height": 3
+  "shipperId": "SHIP123",
+  "facility": {
+    "loadingPoint": "Delhi",
+    "unloadingPoint": "Mumbai",
+    "loadingDate": "2025-04-15T08:00:00Z",
+    "unloadingDate": "2025-04-17T20:00:00Z"
   },
-  "price": 1200.50
+  "productType": "Electronics",
+  "truckType": "Open",
+  "noOfTrucks": 2,
+  "weight": 15000.5,
+  "comment": "Handle with care"
 }
+
 ```
 2. GET /load → Fetch loads (filter by shipperId, truckType)
 ```bash
-GET /load?shipperId=101&truckType=Flatbed
+GET /load?shipperId=SHIP123&truckType=Open
 ```
 3. GET /load/{loadId}
 ```bash
@@ -124,16 +126,20 @@ GET /load/{loadId}
 4. PUT /load/{loadId}
 ```bash
 {
-  "truckType": "Refrigerated",
-  "origin": "New York",
-  "destination": "San Francisco",
-  "weight": 9500,
-  "dimensions": {
-    "length": 9,
-    "width": 5,
-    "height": 3
+  "shipperId": "SHIP123",
+  "facility": {
+    "loadingPoint": "Noida",
+    "unloadingPoint": "Chennai",
+    "loadingDate": "2025-04-20T10:00:00Z",
+    "unloadingDate": "2025-04-23T10:00:00Z"
   },
-  "price": 1500.75
+  "productType": "Machinery",
+  "truckType": "Closed",
+  "noOfTrucks": 3,
+  "weight": 1500.0,
+  "comment": "Urgent delivery",
+  "datePosted": "2025-04-14T09:00:00Z",
+  "status": "POSTED"
 }
 ```
 5. DELETE /load/{loadId}
@@ -145,23 +151,27 @@ Booking Management APIs
 ```bash
 {
   "load": {
-        "id": "loadId"
+        "id": "{loadId}"
   },
   "transporterId": "TRANS789",
   "proposedRate": 25000,
   "comment": "Can pick up early",
   "requestedAt": "2025-04-14T12:00:00Z"
 }
+
 ```
 2. GET /booking → Fetch bookings (filter by shipperId, transporterId)
 ```bash
-GET /booking?shipperId=101&transporterId=201
+GET /booking?shipperId=SHIP123&transporterId=TRANS789
 ```
 3. GET /booking/{bookingId}
 ```bash
 GET /booking/{bookingId}
  ```
 4. PUT /booking/{bookingId}
+```bash
+/booking/{bookingId}
+```
 
 5.DELETE /booking/{bookingId}
 ```bash
