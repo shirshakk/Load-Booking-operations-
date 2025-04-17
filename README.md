@@ -67,7 +67,7 @@ The application will be running at:
 |-------------------------------|--------|-----------------------|
 | `/register`                   | POST   | Public                |
 | `/load/`                       | GET    | USER                  |
-| `/booking/{bookingId}/accept`| POST   | USER                  |
+| `/booking/{bookingId}`| POST   | USER                  |
 | `/booking/`                 | Any    | ADMIN                 |
 | Other routes                  | Any    | Authenticated Users   |
 
