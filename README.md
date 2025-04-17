@@ -125,22 +125,21 @@ GET /load/{loadId}
 ```
 4. PUT /load/{loadId}
 ```bash
-{
+   {
   "shipperId": "SHIP123",
   "facility": {
-    "loadingPoint": "Noida",
-    "unloadingPoint": "Chennai",
-    "loadingDate": "2025-04-20T10:00:00Z",
-    "unloadingDate": "2025-04-23T10:00:00Z"
+    "loadingPoint": "Delhi",
+    "unloadingPoint": "Mumbai",
+    "loadingDate": "2025-04-15T08:00:00Z",
+    "unloadingDate": "2025-04-17T20:00:00Z"
   },
-  "productType": "Machinery",
-  "truckType": "Closed",
-  "noOfTrucks": 3,
-  "weight": 1500.0,
-  "comment": "Urgent delivery",
-  "datePosted": "2025-04-14T09:00:00Z",
-  "status": "POSTED"
+  "productType": "Electronics",
+  "truckType": "Open",
+  "noOfTrucks": 2,
+  "weight": 15000.5,
+  "comment": "Handle with care"
 }
+
 ```
 5. DELETE /load/{loadId}
 ```bash
