@@ -39,7 +39,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .authorizeHttpRequests(authorize -> authorize
             .requestMatchers("/register").permitAll()
             .requestMatchers("/booking/**").hasRole("ADMIN")
-            .requestMatchers("/load/***","/booking/{bookingId}").hasRole("USER")
+            .requestMatchers("/load/**","/booking/{bookingId}").hasRole("USER")
             .anyRequest().authenticated()
         )
         .httpBasic();
