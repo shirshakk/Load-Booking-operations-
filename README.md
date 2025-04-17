@@ -81,18 +81,18 @@ POST /register
 ```bash
 {
   "userName": "john_doe",
-  "email": "john.doe@example.com",
+  "emailId": "john.doe@example.com",
   "password": "password123",
-  "role": "USER"
+  "role": "User"
 }
 ```
 🧑 Example Admin User:
 ```bash
 {
-  "userName": "admin_master",
-  "email": "admin@example.com",
-  "password": "adminpass",
-  "role": "ADMIN"
+  "userName": "admin1",
+  "emailId": "admin1@example.com",
+  "password": "adminpass123",
+  "role": "Admin"
 }
 ```
 
